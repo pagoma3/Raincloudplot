@@ -1,0 +1,71 @@
+---
+title: "Rainplot"
+output: pdf_document
+date: "2023-11-10"
+---
+
+## Electricity by sources in Spain
+
+Based data coming from the International Energy Agency, this notebook tries to
+visualise the origin of electricity generation in Spain from 2010 to 2023.
+
+
+```{r}
+# Load and if necessary install libraries
+#install.packages("ggplot2")
+library(ggplot2)
+#install.packages("ggdist")
+library(ggdist)
+
+# Load data
+df <- read.csv("Monthly Electricity Consumption.csv", col.names = c("Country", "Time", "Balance", "Product", "Value", "Unit"), sep = ";")
+
+# Select data relating to electricity generation in Spain
+spain_electr <- df[df$Country == "Spain" & df$Balance == "Net Electricity Production", ]
+
+# List the sources of energy to filter
+sources_list <- c("Nuclear", "Total Combustible Fuels", "Total Renewables (Hydro, Geo, Solar, Wind, Other)")
+
+electr_sources <- spain_electr[spain_electr$Product %in% sources_list, ]
+
+```
+
+```{r}
+# Create raincloud plot
+
+ggplot(electr_sources, aes(x = Product, y = Value, fill = Product)) + 
+  
+  # Violin plot
+  stat_halfeye(
+    adjust = .5, 
+    width = .6, 
+    justification = -.2, 
+    .width = 0, 
+    point_colour = NA
+  ) +
+  
+  # Boxplot
+  geom_boxplot(
+    width = .15, 
+    outlier.color = NA
+  ) +
+
+  # Scatterplot
+  ggdist::stat_dots(
+    side = "left", 
+    justification = 1.12, 
+    binwidth = .25
+  ) + 
+  
+  # Center plots
+  coord_cartesian(xlim = c(1.3, 2.9)) +
+  
+  labs(
+    title = "Electricidad generada mensualmente en España según fuente",
+    x = "Tipo de electricidad",
+    y = "GWh generados por mes"
+  ) + 
+  
+  theme(legend.position = "none")
+`
+```
