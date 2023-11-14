@@ -1,0 +1,16 @@
+Fuentes y visualizaciones de la PEC2 de Visualización de Datos:
+
+1. Treemap 
+Fuente: https://data.worldbank.org/indicator/BX.TRF.PWKR.CD.DT
+
+Visualización: https://public.tableau.com/views/Remittances_16996115687430/Sheet1?:language=es-ES&:display_count=n&:origin=viz_share_link 
+
+2. Dot Matrix Chart
+Fuente: https://eleccions.gencat.cat/ca/resultats-electorals/#/dades?tipusProces=A&proces=A20211#dades
+
+Visualización: https://public.flourish.studio/visualisation/15697550/
+
+3. Rain cloud Plots
+Fuente: https://www.iea.org/data-and-statistics/data-product/monthly-electricity-statistics
+
+Visualización: https://github.com/pagoma3/Raincloudplot/blob/main/Raincloud%20Plot.png
